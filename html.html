@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    $(document).ready(function(){
+            // check firstname
+            function checkfn(){
+                var kt =/(^[A-Z]{1})([a-z]+)(\s([A-z]{1})([a-z]*))*$/;
+                if(!kt.test($("#inputFirstName").val())){
+                    alert("Nhập sai!");
+                    return false;
+                }else{
+                    alert("Đúng");
+                    return true;
+                }
+            }
+            $("#inputFirstName").blur(checkfn);
+
+            // check lastname
+            function checkln(){
+                var kt =/(^[A-Z]{1})([a-z]+)(\s([A-z]{1})([a-z]*))*$/;
+                if(!kt.test($("#inputLastName").val())){
+                    alert("Nhập sai!");
+                    return false;
+                }else{
+                    alert("Đúng");
+                    return true;
+                }
+            }
+            $("#inputLastName").blur(checkln);
+
+            function checkmail(){
+                var kt = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                if(!kt.test($("#inputEmail").val())){
+                    alert("Nhập sai!");
+                    return false;
+                }else{
+                    alert("Đúng");
+                    return true;
+                }
+            }
+            $("#inputEmail").blur(checkmail);
+
+            function checkmk(){
+                var kt = /\w{8}/; // /^\w{8}$/ đúng 8 kí tự
+                if(!kt.test($("#inputPassword").val())){
+                    alert("Nhập sai!");
+                    return false;
+                }else{
+                    alert("Đúng");
+                    return true;
+                }
+            }
+            $("#inputPassword").blur(checkmk);
+
+            function checklmk(){
+                if($("#inputPasswordConfirm").val() != $("#inputPassword").val()){
+                    alert("Không giống mk");
+                    return false;
+                }else{
+                    alert("Đúng");
+                    return true;
+                }
+            }
+            $("#inputPasswordConfirm").blur(checklmk);
+        })
+
+        $("#dk").click(function(){
+            $("#mymodal").modal();
+        });
+        // check mã bệnh nhân
+        function checkmbn(){
+            var ma = /^BN-\d{5}$/;
+            if($("#mbn").val()==""){
+                $("#tbmbn").html("Bắt Buộc");
+                $("#tbmbn").addClass("danger");
+                return false;
+            }else if(!ma.test($("#mbn").val())){
+                $("#tbmbn").html("BN-YYYYY");
+                $("#tbmbn").addClass("danger");
+                return false;
+            }else{
+                $("#tbmbn").html("Đúng");
+                return true;
+            }
+        }
+        $("#mbn").blur(checkmbn);
+
+        // check mật khẩu
+        function checkmk(){
+            var ma = /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]{6,}$/;
+            if($("#mk").val()==""){
+                $("#tbmk").html("Bắt Buộc");
+                $("#tbmk").addClass("danger");
+                return false;
+            }else if(!ma.test($("#mk").val())){
+                $("#tbmk").html("Hãy nhập theo yêu cầu!");
+                $("#tbmk").addClass("danger");
+                return false;
+            }else{
+                $("#tbmk").html("Đúng");
+                return true;
+            }
+        }
+        $("#mk").blur(checkmk);
+
+        //check ngày khám
+        function checknk(){
+            var day = new Date($("#nk").val());
+            var today = new Date();
+            day.setFullYear(day.getFullYear() );
+                if (today >= day)
+                {
+                    $("#tbnk").html("Ngày khám phải sau ngày hiện tại!");
+                    $("#tbnk").addClass("danger");
+                    return false;
+                }
+                else
+                {   
+                    $("#tbnk").html("Đúng");
+                    return true;
+                }
+            };
+            $("#nk").blur(checknk);
+
+            //check tiền dịch vụ
+            $(".ldv").click(function(){
+                var tong = 0;
+                var n = $(".ldv:checked").length;
+                if(n>0){
+                    $(".ldv:checked").each(function(){
+                        tong += parseFloat($(this).val());
+                        $("#tiendv").val(tong);
+                    })
+                }
+            })
+            //check chuyên khoa
+            $("#ck").change(function(){
+                $("#ck option:selected").each(function(){
+                    $("#ck").val($(this).val());
+                });
+            });
+            //lưu vô bảng
+            $("#save").click(function(){
+                if(!checkmbn()||!checkmk()||!checknk()){
+                    alert("Mời bạn nhập đủ thông tin!");
+                    return false;
+                }
+                var mbn = $("#mbn").val();
+                var mk = $("#mk").val();
+                var nk = $("#nk").val();
+                var ptdv = $("#tiendv").val();
+                var ck = $("#ck").val();
+                var them = "<tr><td>" + (i++) + "</td><td>" + mbn + "</td><td>" + mk + "</td><td>" + nk + "</td><td>" + ptdv + "</td><td>" + ck + "</td></tr>"
+                $("table").append(them);
+                $("mymodal").modal("hide");
+                return true;
+            })
+</script>
+<body>
+    
+</body>
+</html>
