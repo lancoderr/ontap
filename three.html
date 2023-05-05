@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo List</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="app.js"></script>
+</head>
+<script>
+    $(document).ready(function() {
+	$.getJSON("https://jsonplaceholder.typicode.com/todos/", function(data) {
+		var table = $("#todo-table");
+		$.each(data, function(key, value) {
+			var row = "<tr>";
+			row += "<td>" + value.id + "</td>";
+			row += "<td>" + value.title + "</td>";
+			row += "<td>" + value.completed + "</td>";
+			row += "</tr>";
+			table.append(row);
+		});
+	});
+});
+</script>
+<body>
+	<div class="container">
+		<h2>Todo List</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Title</th>
+					<th>Completed</th>
+				</tr>
+			</thead>
+			<tbody id="todo-table">
+				
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
