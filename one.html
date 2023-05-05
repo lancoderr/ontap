@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <script src="../JS/jquery-3.6.1.min.js"></script>
+    <script src="../JS/bootstrap.min.js"></script>
+    <title>Document</title>
+</head>
+<script>
+    $(document).ready(function(){
+        var i = 1;
+        // check firtname
+        function checkfn(){
+            var kt = /(^[A-Z]{1})([a-z]+)(\s([A-z]{1})([a-z]*))*$/;
+            if(!kt.test($("#fn").val())){
+                alert("Không phải số!");
+                return false;
+            }else{
+                alert("Đúng");
+                return true;
+            }
+        }
+        $("#fn").blur(checkfn);
+
+        // check lastname
+        function checkln(){
+            var kt = /(^[A-Z]{1})([a-z]+)(\s([A-z]{1})([a-z]*))*$/;
+            if(!kt.test($("#ln").val())){
+                alert("Không phải số!");
+                return false;
+            }else{
+                alert("Đúng");
+                return true;
+            }
+        }
+        $("#ln").blur(checkln);
+
+        // check email
+        function checkmail(){
+            var kt = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if(!kt.test($("#mail").val())){
+                alert("Sai yêu cầu!");
+                return false;
+            }else{
+                alert("Đúng");
+                return true;
+            }
+        }
+        $("#mail").blur(checkmail);
+
+        // check mk
+        function checkmk(){
+            var kt = /\w{8}(?!.*\s)/;
+            if(!kt.test($("#mk").val())){
+                alert("ít nhất 8 kí tự");
+                return false;
+            }else{
+                alert("Đúng");
+                return true;
+            }
+        }
+        $("#mk").blur(checkmk);
+        // check lmk
+        function checklmk(){
+            if($("#lmk").val() != $("#mk").val()){
+                alert("Phải giống mk");
+                return false;
+            }else{
+                alert("Đúng");
+                return true;
+            }
+        }
+        $("#lmk").blur(checklmk);
+    });
+</script>
+<body>
+    <div class="container">
+        <div class="row border">
+            <div class="col-12">
+                <h1><center>Create Account</center></h1>
+            </div>
+        </div><br>
+        <form action="" class="form-control">
+            <div class="row">
+                <div class="col-6">
+                    <input type="text" id="fn" placeholder="First name" style="width: 100%;">
+                </div>
+                <div class="col-6">
+                    <input type="text" id="ln" placeholder="Last name" style="width: 100%;">
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-12">
+                    <input type="email" id="mail" placeholder="Email address" style="width: 100%;">
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-6">
+                    <input type="password" id="mk" placeholder="password" style="width: 100%;">
+                </div>
+                <div class="col-6">
+                    <input type="password" id="lmk" placeholder="Confirm password" style="width: 100%;">
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-12">
+                    <input type="submit" id="save" value="Create Account" class="btn-primary btn-block">
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
